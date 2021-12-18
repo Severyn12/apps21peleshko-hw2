@@ -62,8 +62,8 @@ public class LinkedListTest {
         assertEquals(nwLinkedList_3.getFirst(),124);
         assertEquals(nwLinkedList_3.getLast(),23);
         ImmutableLinkedList nwLinkedList_8 = nwLinkedList_2.removeFirst();
-        assertEquals(nwLinkedList_8.toString(),"ImmutableLinkedList{start_node=Node{data=124, " +
-                "next=Node{data=23, next=Node{data=45, next=null}}}}");
+        assertEquals(nwLinkedList_8.toString(),"ImmutableLinkedList{start_node=Node{data=23, " +
+                "next=Node{data=45, next=null}}}");
         ImmutableLinkedList nwLinkedList_9 = nwLinkedList_2.removeLast();
         assertEquals(nwLinkedList_9.toString(),"ImmutableLinkedList{start_node=Node{data=124, " +
                 "next=Node{data=23, next=null}}}");
