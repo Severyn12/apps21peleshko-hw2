@@ -3,16 +3,16 @@ package ua.edu.ucu.collections;
 import ua.edu.ucu.collections.immutable.ImmutableLinkedList;
 
 public class Queue {
-    public ImmutableLinkedList data = new ImmutableLinkedList();
+    private ImmutableLinkedList data = new ImmutableLinkedList();
 
     public Object peek() {
         return data.getFirst();
     }
 
     public Object dequeue() {
-        Object first_node = data.getFirst();
+        Object firstNode = data.getFirst();
         data = data.removeFirst();
-        return first_node;
+        return firstNode;
     }
 
     public void enqueue(Object element) {

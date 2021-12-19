@@ -1,7 +1,6 @@
 package ua.edu.ucu.collections;
 
 import ua.edu.ucu.collections.immutable.ImmutableLinkedList;
-import ua.edu.ucu.collections.immutable.ImmutableList;
 
 public class Stack {
     private ImmutableLinkedList data = new ImmutableLinkedList();
@@ -11,9 +10,9 @@ public class Stack {
     }
 
     public Object pop() {
-        Object last_node = data.getLast();
+        Object lastNode = data.getLast();
         data =  data.removeLast();
-        return last_node;
+        return lastNode;
     }
 
     public Object peek() {

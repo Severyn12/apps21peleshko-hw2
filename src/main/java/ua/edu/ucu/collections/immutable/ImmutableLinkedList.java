@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.util.Arrays;
 
 @Setter @Getter
-public final class ImmutableLinkedList implements ImmutableList{
+public final class ImmutableLinkedList implements ImmutableList {
     private Node startNode = null;
     private Node lastNode = null;
     private int nodeAmount = 0;
