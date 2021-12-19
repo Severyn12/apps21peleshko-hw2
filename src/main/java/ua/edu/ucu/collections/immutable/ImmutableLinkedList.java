@@ -15,41 +15,42 @@ public final class ImmutableLinkedList implements ImmutableList{
         private Object data;
         private Node next;
 
-        private Node(Object data) {
-            this.data = data;
+        private Node(Object info) {
+            this.data = info;
             this.next = null;
         }
 
-        private Node copy(){
-            Node nw_node = new Node(data);
-            nw_node.next = next;
+        private Node copy() {
+            Node nwNode = new Node(data);
+            nwNode.next = next;
 
-            return nw_node;
+            return nwNode;
         }
-        private Node copy_chain() {
-            Node cur_node = this.copy();
-            Node st_node = cur_node;
-            while (cur_node.next != null) {
-                cur_node.next = cur_node.next.copy();
-                cur_node = cur_node.next;
+        private Node copyChain() {
+            Node curNode = this.copy();
+            Node stNode = curNode;
+            while (curNode.next != null) {
+                curNode.next = curNode.next.copy();
+                curNode = curNode.next;
             }
-            return st_node;
+            return stNode;
         }
 
         @Override
         public String toString() {
-            return "Node{" +
-                    "data=" + data +
-                    ", next=" + next +
-                    '}';
+            return "Node{"
+                   + "data=" + data
+                   + ", next=" + next
+                   + '}';
         }
     }
 
-    public ImmutableLinkedList(Object [] elements) {
-        ImmutableLinkedList nw_list = (ImmutableLinkedList) new ImmutableLinkedList().addAll(elements);
-        nodeAmount = nw_list.getNodeAmount();
-        startNode = nw_list.getStartNode();
-        lastNode = nw_list.getLastNode();
+    public ImmutableLinkedList(Object[] elements) {
+        ImmutableLinkedList nwList = (ImmutableLinkedList)
+                new ImmutableLinkedList().addAll(elements);
+        nodeAmount = nwList.getNodeAmount();
+        startNode = nwList.getStartNode();
+        lastNode = nwList.getLastNode();
 
     }
 
@@ -59,13 +60,13 @@ public final class ImmutableLinkedList implements ImmutableList{
     @Override
     public ImmutableList add(Object element) {
         ImmutableLinkedList linkedList = new ImmutableLinkedList();
-        if (startNode == null){
+        if (startNode == null) {
             linkedList.setStartNode(new Node(element));
             linkedList.setLastNode(new Node(element));
         }
         else {
 
-            linkedList.setStartNode(startNode.copy_chain());
+            linkedList.setStartNode(startNode.copyChain());
             Node curNode = linkedList.getStartNode();
 
 
@@ -91,20 +92,20 @@ public final class ImmutableLinkedList implements ImmutableList{
 
 
         if (startNode != null) {
-            linkedList.setStartNode(startNode.copy_chain());
+            linkedList.setStartNode(startNode.copyChain());
             Node curNode = linkedList.getStartNode();
 
-            while (curNode.next != null && i < index-1) {
+            while (curNode.next != null && i < index - 1) {
 
                 curNode = curNode.next;
                 i++;
             }
             if (curNode.next != null) {
-                Node next_node = curNode.next;
+                Node nextNode = curNode.next;
 
 
                 curNode.next = new Node(element);
-                curNode.next.next = next_node;
+                curNode.next.next = nextNode;
 
             }
             else {
@@ -113,7 +114,7 @@ public final class ImmutableLinkedList implements ImmutableList{
 
 
         }
-        else{
+        else {
             linkedList.setStartNode(new Node(element));
         }
         linkedList.setNodeAmount(nodeAmount + 1);
@@ -126,7 +127,7 @@ public final class ImmutableLinkedList implements ImmutableList{
         Node curNode = null;
 
         if (startNode != null) {
-            linkedList.setStartNode(startNode.copy_chain());
+            linkedList.setStartNode(startNode.copyChain());
             curNode = linkedList.getStartNode();
             while (curNode.next != null) {
 
@@ -138,13 +139,13 @@ public final class ImmutableLinkedList implements ImmutableList{
 
             curNode = curNode.next;
         }
-        else{
+        else {
             linkedList.setStartNode(new Node(elements[0]));
             curNode = linkedList.getStartNode();
         }
 
         elements = Arrays.copyOfRange(elements, 1, elements.length);
-        for (int i = 0; i < elements.length; i++){
+        for (int i = 0; i < elements.length; i++) {
             curNode.next = new Node(elements[i]);
             curNode = curNode.next;
         }
@@ -162,35 +163,35 @@ public final class ImmutableLinkedList implements ImmutableList{
         int i = 0;
         Node curNode = null;
         if (startNode != null) {
-            linkedList.setStartNode(startNode.copy_chain());
+            linkedList.setStartNode(startNode.copyChain());
             curNode = linkedList.getStartNode();
-            while (curNode.next != null && i < index-1) {
+            while (curNode.next != null && i < index - 1) {
                 i++;
                 curNode = curNode.next;
             }
         }
 
-        ImmutableLinkedList nw_link_lst = new ImmutableLinkedList(elements);
-        if (curNode == null){
-            linkedList.setStartNode(nw_link_lst.getStartNode());
+        ImmutableLinkedList nwLinkLst = new ImmutableLinkedList(elements);
+        if (curNode == null) {
+            linkedList.setStartNode(nwLinkLst.getStartNode());
 
         }
-        else{
+        else {
 
-            if (curNode.next == null){
+            if (curNode.next == null) {
 
-                curNode.next = nw_link_lst.getStartNode();
+                curNode.next = nwLinkLst.getStartNode();
             }
             else {
 
-                Node nx_node = curNode.next;
-                curNode.next = nw_link_lst.getStartNode();
+                Node nxNode = curNode.next;
+                curNode.next = nwLinkLst.getStartNode();
                 curNode = curNode.next;
                 while (curNode.next != null) {
 
                     curNode = curNode.next;
                 }
-                curNode.next = nx_node;
+                curNode.next = nxNode;
             }
 
         }
@@ -212,7 +213,6 @@ public final class ImmutableLinkedList implements ImmutableList{
                 curNode = curNode.next;
                 i++;
             }
-            
         }
         return curNode.data;
 
@@ -221,19 +221,18 @@ public final class ImmutableLinkedList implements ImmutableList{
     @Override
     public ImmutableList remove(int index) {
         ImmutableLinkedList linkedList = new ImmutableLinkedList();
-        linkedList.setStartNode(startNode.copy_chain());
-        
+        linkedList.setStartNode(startNode.copyChain());
         Node curNode = linkedList.getStartNode();
         int i = 0;
         if (startNode != null) {
 
-            while (curNode.next != null && i < index-1) {
+            while (curNode.next != null && i < index - 1) {
 
                 curNode = curNode.next;
                 i++;
             }
-            Node nx_test = curNode.next.next;
-            curNode.next = nx_test;
+            Node nxTest = curNode.next.next;
+            curNode.next = nxTest;
 
         }
         linkedList.setNodeAmount(nodeAmount - 1);
@@ -243,21 +242,19 @@ public final class ImmutableLinkedList implements ImmutableList{
     @Override
     public ImmutableList set(int index, Object element) {
         ImmutableLinkedList linkedList = new ImmutableLinkedList();
-        linkedList.setStartNode(startNode.copy_chain());
-        Node cur_node = linkedList.getStartNode();
-        
-        
+        linkedList.setStartNode(startNode.copyChain());
+        Node curNode = linkedList.getStartNode();
 
         int i = 0;
         if (startNode != null) {
 
-            while (cur_node.next != null && i < index) {
+            while (curNode.next != null && i < index) {
 
-                cur_node = cur_node.next;
+                curNode = curNode.next;
                 i++;
             }
 
-            cur_node.data = element;
+            curNode.data = element;
 
         }
         linkedList.setNodeAmount(nodeAmount);
@@ -266,16 +263,15 @@ public final class ImmutableLinkedList implements ImmutableList{
 
     @Override
     public int indexOf(Object element) {
-        ImmutableLinkedList linked_list = new ImmutableLinkedList();
-        linked_list.setStartNode(startNode);
-        
-        Node cur_node = linked_list.getStartNode();
+        ImmutableLinkedList linkedList = new ImmutableLinkedList();
+        linkedList.setStartNode(startNode);
+        Node curNode = linkedList.getStartNode();
         if (startNode != null) {
             for (int i = 0; i < nodeAmount; i++) {
-                if (cur_node.data == element){
+                if (curNode.data == element) {
                     return  i;
                 }
-                cur_node = cur_node.next;
+                curNode = curNode.next;
 
             }
         }
@@ -294,7 +290,7 @@ public final class ImmutableLinkedList implements ImmutableList{
 
     @Override
     public boolean isEmpty() {
-        if (nodeAmount == 0){
+        if (nodeAmount == 0) {
             return true;
         }
         return false;
@@ -302,10 +298,10 @@ public final class ImmutableLinkedList implements ImmutableList{
 
     @Override
     public Object[] toArray() {
-        Object [] elements = new Object[nodeAmount];
+        Object[] elements = new Object[nodeAmount];
         Node curNode = startNode;
         int i = 0;
-        while (curNode.next != null){
+        while (curNode.next != null) {
             elements[i] = curNode.data;
             curNode = curNode.next;
         }
@@ -336,7 +332,7 @@ public final class ImmutableLinkedList implements ImmutableList{
 
     public Node getTail() {
         Node curNode = startNode;
-        while (curNode.next != null){
+        while (curNode.next != null) {
             curNode = curNode.next;
         }
         return curNode;
@@ -348,7 +344,7 @@ public final class ImmutableLinkedList implements ImmutableList{
 
     public Object getLast() {
         Node curNode = startNode;
-        while (curNode.next != null){
+        while (curNode.next != null) {
             curNode = curNode.next;
         }
         return curNode.data;
@@ -357,7 +353,7 @@ public final class ImmutableLinkedList implements ImmutableList{
     public ImmutableLinkedList removeFirst() {
         ImmutableLinkedList linkedList = new ImmutableLinkedList();
 
-        linkedList.setStartNode(startNode.copy_chain());
+        linkedList.setStartNode(startNode.copyChain());
         Node curNode = linkedList.getStartNode();
         Node nxNode = curNode.next;
         linkedList.setStartNode(nxNode);
@@ -369,7 +365,7 @@ public final class ImmutableLinkedList implements ImmutableList{
     public ImmutableLinkedList removeLast() {
         ImmutableLinkedList linkedList = new ImmutableLinkedList();
 
-        linkedList.setStartNode(startNode.copy_chain());
+        linkedList.setStartNode(startNode.copyChain());
         Node curNode = linkedList.getStartNode();
         if (nodeAmount == 2) {
             curNode.next = null;
@@ -391,9 +387,9 @@ public final class ImmutableLinkedList implements ImmutableList{
 
     @Override
     public String toString() {
-        return "ImmutableLinkedList{" +
-                "start_node=" + startNode +
-                '}';
+        return "ImmutableLinkedList{"
+                + "start_node=" + startNode
+                + '}';
     }
 
 

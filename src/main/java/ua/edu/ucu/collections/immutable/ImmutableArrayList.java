@@ -20,37 +20,37 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList add(Object element) {
-        Object [] nwData = null;
+        Object[] nwData = null;
         ImmutableArrayList nwList = new ImmutableArrayList();
-        if (elementNum + 1 > data.length){
-            nwData = new Object[data.length*2];
+        if (elementNum + 1 > data.length) {
+            nwData = new Object[data.length * 2];
         }
-        else{
+        else {
             nwData = new Object[data.length];
         }
-        nwList.setData(copy_data(data, nwData));
+        nwList.setData(copyData(data, nwData));
         nwData[elementNum] = element;
         nwList.setElementNum(elementNum + 1);
 
         return nwList;
     }
-    public Object[] copy_data(Object[] arr_1, Object[] arr_2){
-        for (int i = 0; i < arr_1.length; i++){
-            arr_2[i] = arr_1[i];
+    public Object[] copyData(Object[] arr1, Object[] arr2) {
+        for (int i = 0; i < arr1.length; i++) {
+            arr2[i] = arr1[i];
         }
-        return arr_2;
+        return arr2;
     }
     @Override
     public ImmutableList add(int index, Object element) {
-        Object [] nwData = null;
+        Object[] nwData = null;
         ImmutableArrayList nwList = new ImmutableArrayList();
         if (elementNum + 1 > data.length) {
             nwData = new Object[data.length * 2];
         }
-        else{
+        else {
             nwData = new Object[data.length];
         }
-        nwData = copy_data(data, nwData);
+        nwData = copyData(data, nwData);
         if (index < nwData.length) {
 
 
@@ -63,7 +63,7 @@ public final class ImmutableArrayList implements ImmutableList {
                 cur_element = nx_element;
             }
         }
-        else{
+        else {
             nwData[elementNum] = element;
         }
 
@@ -76,28 +76,28 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList addAll(Object[] elements) {
-        Object [] nwData = null;
+        Object[] nwData = null;
         int size = 0;
         ImmutableArrayList nwList = new ImmutableArrayList();
-        if (data.length == 1){
+        if (data.length == 1) {
             size = (elementNum + elements.length) + (elementNum + elements.length) % 2;
         }
-        else if ( (elementNum + elements.length)%2 == 0){
-            size = (int) Math.ceil((elementNum + elements.length)/ (float)data.length);
+        else if ((elementNum + elements.length) % 2 == 0) {
+            size = (int) Math.ceil((elementNum + elements.length) / (float)data.length);
         }
         else {
             size = (int) Math.ceil((elementNum + elements.length) % 2 / (float) data.length);
         }
-        if (elementNum + elements.length > data.length){
-            nwData = new Object[data.length+data.length*size];
+        if (elementNum + elements.length > data.length) {
+            nwData = new Object[data.length + data.length * size];
         }
-        else{
+        else {
             nwData = new Object[data.length];
         }
-        nwData = copy_data(data, nwData);
+        nwData = copyData(data, nwData);
 
-        for (int i = 0; i < elements.length; i++){
-            nwData[elementNum+i] = elements[i];
+        for (int i = 0; i < elements.length; i++) {
+            nwData[elementNum + i] = elements[i];
         }
 
         nwList.setData(nwData);
@@ -107,31 +107,31 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList addAll(int index, Object[] elements) {
-        Object [] nwData = null;
+        Object[] nwData = null;
         int size = 0;
         ImmutableArrayList nwList = new ImmutableArrayList();
-        if (data.length == 1){
+        if (data.length == 1) {
             size = (elementNum + elements.length) + (elementNum + elements.length) % 2;
         }
-        else if ( (elementNum + elements.length)%2 == 0){
+        else if ((elementNum + elements.length) % 2 == 0) {
             
-            size = (int) Math.ceil((elementNum + elements.length)/ (float)data.length);
+            size = (int) Math.ceil((elementNum + elements.length) / (float)data.length);
         }
         else {
             size = (int) Math.ceil((elementNum + elements.length) % 2 / (float) data.length);
         }
-        if (elementNum + elements.length > data.length){
+        if (elementNum + elements.length > data.length) {
 
-            nwData = new Object[data.length+data.length*size];
+            nwData = new Object[data.length + data.length * size];
         }
-        else{
+        else {
             nwData = new Object[data.length];
         }
-        nwData = copy_data(data, nwData);
+        nwData = copyData(data, nwData);
 
         Object cur_element = nwData[index];
-        for (int i = 0; i < elements.length; i++){
-            nwData[index+i] = elements[i];
+        for (int i = 0; i < elements.length; i++) {
+            nwData[index + i] = elements[i];
         }
         for (int i = index + 1; i <= elementNum; i++) {
             Object nx_element = nwData[i + elements.length - 1];
@@ -149,7 +149,7 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public Object get(int index) {
-        if (index < data.length){
+        if (index < data.length) {
             return data[index];
         }
         return null;
@@ -157,7 +157,7 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList remove(int index) {
-        Object [] nwData = null;
+        Object[] nwData = null;
         nwData = data.clone();
         ImmutableArrayList nwList = new ImmutableArrayList();
         if (elementNum > 1) {
@@ -177,7 +177,7 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList set(int index, Object element) {
-        Object [] nwData = null;
+        Object[] nwData = null;
         nwData = data.clone();
         ImmutableArrayList nwList = new ImmutableArrayList();
         nwData[index] = element;
@@ -188,9 +188,9 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public int indexOf(Object element) {
-        for (int i = 0; i < data.length; i++){
+        for (int i = 0; i < data.length; i++) {
 
-            if (data[i].equals(element)){
+            if (data[i].equals(element)) {
                 return i;
             }
         }
@@ -217,8 +217,8 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public Object[] toArray() {
-        Object [] elements = new Object[elementNum];
-        for (int i = 0; i < elementNum; i++){
+        Object[] elements = new Object[elementNum];
+        for (int i = 0; i < elementNum; i++) {
             elements[i] = data[i];
         }
         return elements;
