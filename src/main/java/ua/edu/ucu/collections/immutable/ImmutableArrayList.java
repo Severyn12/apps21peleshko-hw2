@@ -35,11 +35,11 @@ public final class ImmutableArrayList implements ImmutableList {
 
         return nwList;
     }
-    public Object[] copyData(Object[] arr1, Object[] arr2) {
-        for (int i = 0; i < arr1.length; i++) {
-            arr2[i] = arr1[i];
+    public Object[] copyData(Object[] copyArr, Object[] arr) {
+        for (int i = 0; i < copyArr.length; i++) {
+            arr[i] = copyArr[i];
         }
-        return arr2;
+        return arr;
     }
     @Override
     public ImmutableList add(int index, Object element) {
@@ -86,7 +86,7 @@ public final class ImmutableArrayList implements ImmutableList {
         }
         else if ((elementNum + elements.length) % 2 == 0) {
             size = (int) Math.ceil((elementNum + elements.length)
-                    / (float)data.length);
+                    / (float) data.length);
         }
         else {
             size = (int) Math.ceil((elementNum + elements.length)
